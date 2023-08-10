@@ -1,0 +1,49 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Buildozer
+      run: |
+        pip install buildozer
+
+    - name: Set up Android SDK
+      run: |
+        wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+        unzip -q sdk-tools-linux-4333796.zip -d android-sdk
+        echo 'export ANDROID_SDK_ROOT=$HOME/android-sdk' >> $GITHUB_ENV
+        echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools' >> $GITHUB_ENV
+
+    - name: Accept Android licenses
+      run: yes | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses
+
+    - name: Install Buildozer dependencies
+      run: |
+        buildozer android debug requirements
+
+    - name: Build APK
+      run: |
+        buildozer android debug
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: package
+        path: ./bin/
+
+    # ... other steps as needed
