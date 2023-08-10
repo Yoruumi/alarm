@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
 env:
-  ANDROID_HOME: C:\Users\Ryevk\AppData\Local\Android\Sdk
+  ANDROID_HOME: ${{ env.DEFAULT_ANDROID_HOME }}
 
 jobs:
   build:
