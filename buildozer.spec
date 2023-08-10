@@ -120,7 +120,7 @@ android.permissions = INTERNET, BATTERY_STATS, REQUEST_IGNORE_BATTERY_OPTIMIZATI
 #android.ndk_path =
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+#android.sdk_path = C:\Users\Ryevk\AppData\Local\Android\Sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
