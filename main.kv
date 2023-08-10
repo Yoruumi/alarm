@@ -1,0 +1,31 @@
+#:kivy 2.2.1
+
+<myLayout>:
+    slide_text: slider_label
+    orientation: "vertical"
+
+    Label:
+        id: slider_label
+        text: "Escoge el limite de bateria!"
+        font_size: 30
+
+    Label:
+        id: current_value_label
+        text: f"Current value: {battery_slider.value:.0f}"  # Show current value of slider
+        font_size: 20
+
+    Slider:
+        id: battery_slider
+        min: 70
+        max: 100
+        step: 1
+        orientation: "horizontal"
+        padding: 50
+        on_value: root.slide_it(*args)
+
+    Button:
+        text: "Submit"
+        size_hint_y: None
+        height: "200dp"
+        font_size: 32
+        on_release: root.submit_button_pressed()
