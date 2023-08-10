@@ -1,3 +1,2 @@
 kivy
-psutil
 # Add other required packages here
