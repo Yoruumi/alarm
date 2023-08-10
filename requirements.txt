@@ -1,0 +1,4 @@
+kivy
+os
+psutil
+# Add other required packages here
