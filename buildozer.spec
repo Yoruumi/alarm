@@ -63,7 +63,7 @@ orientation = portrait
 # author = © Copyright Novfensec Inc.
 
 # change the major version of python used by the app
-osx.python_version = 3
+osx.python_version = 3.11.4
 
 # Kivy version to use
 osx.kivy_version = 2.2.1
