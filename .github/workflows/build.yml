@@ -1,0 +1,57 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+      
+env:
+  ANDROID_HOME: C:\Users\Ryevk\AppData\Local\Android\Sdk
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Cython
+      run: pip install cython
+
+    - name: Install Buildozer
+      run: pip install buildozer
+
+    # Rest of the setup steps
+
+    - name: Install Buildozer dependencies
+      run: |
+        pip install -r requirements.txt
+        buildozer android debug requirements
+
+    # Rest of the steps
+
+    - name: Build APK
+      run: |
+        buildozer android debug
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: package
+        path: ./bin/
+
+    # ... other steps as needed
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Android SDK
+      run: |
+        sdkmanager --licenses --accept
+        sdkmanager "build-tools;34.0.0"
